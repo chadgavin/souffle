@@ -246,9 +246,13 @@ m4_ifblank(m4_join([],ENV_CATEGORIES), [
 m4_foreach(current, [CATEGORIES],
 [
   AT_BANNER([current])
-  m4_if($SWIG_TRUE, )
-  m4_if(current, Swig, [ 
-    m4_include([swig.at])
+
+  # TODO (lh): only perform swig tests if swig is enabled, otherwise do not
+  m4_if(current, Swig, [
+    m4_esyscmd_s(echo "$SWIG_FALSE hiii") 
+    m4_if("$SWIG_FALSE", [#], [
+      m4_include([swig.at])   
+    ])
   ])
 
   m4_if(current, Syntactic, [
