@@ -249,10 +249,7 @@ m4_foreach(current, [CATEGORIES],
 
   # TODO (lh): only perform swig tests if swig is enabled, otherwise do not
   m4_if(current, Swig, [
-    m4_esyscmd_s(echo "$SWIG_FALSE hiii") 
-    m4_if("$SWIG_FALSE", [#], [
-      m4_include([swig.at])   
-    ])
+    m4_ifval([$SWIG_FALSE], [m4_include([swig.at])], [])
   ])
 
   m4_if(current, Syntactic, [
