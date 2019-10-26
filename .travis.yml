@@ -126,7 +126,13 @@ jobs:
     env:
     - "gcc-setup"
     - *gcc_environment
-    - SOUFFLE_CATEGORY=Unit,Swig,Syntactic,Interface,Profile,Provenance SOUFFLE_CONFS="-j8,-c -j8"
+    - SOUFFLE_CATEGORY=Unit,Swig,Syntactic,Semantic,Interface,Profile,Provenance SOUFFLE_CONFS="-j8,-c -j8"
+  - <<: *osxgcc
+    before_script: ".travis/init_test_swig.sh"
+    env:
+    - "gcc-setup"
+    - SOUFFLE_CATEGORY=Unit,Swig,Syntactic,Semantic,Interface,Profile,Provenance SOUFFLE_CONFS="-j8,-c -j8"
+
 
 # Testing stage with engine option (-c -j8 -efile, FastEvaluation and select others)
   - <<: *linuxgcc
